@@ -1,8 +1,7 @@
 package be.vdab.groenetenen.services;
 
-import java.util.List;
-
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +18,13 @@ class DefaultWerknemerService implements WerknemerService {
 		this.werknemerRepository = werknemerRepository;
 	}
 
+//	@Override
+//	public List<Werknemer> findAll() {
+//		return werknemerRepository.findAll(Sort.by("familienaam", "voornaam"));
+//	}
+	
 	@Override
-	public List<Werknemer> findAll() {
-		return werknemerRepository.findAll(Sort.by("familienaam", "voornaam"));
+	public Page<Werknemer> findAll(Pageable pageable) {
+		return werknemerRepository.findAll(pageable); 
 	}
 }

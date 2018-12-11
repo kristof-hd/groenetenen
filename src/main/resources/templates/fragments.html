@@ -18,19 +18,21 @@
 				</ul></li>
 			<li><a href='#'>Werknemers</a>
 				<ul>
-<!-- 					<li sec:authorize-url='/werknemers'><a th:href='@{/werknemers}'>Lijst</a></li>
- -->				</ul></li>
+					<li><a th:href='@{/werknemers}'>Lijst</a></li>
+				</ul></li>
 			<li><a href='#'>Offertes</a>
 				<ul>
 					<li><a th:href='@{/offertes/toevoegen}'>Toevoegen</a></li>
 				</ul></li>
-<!-- 			<li sec:authorize='isAnonymous'><a th:href='@{/login}'>Aanmelden</a></li> -->
+			<li><a th:href='@{/login}'>Aanmelden</a></li>
 			<li>
 				<form method='post' th:action='@{/logout}' id='logoutform'>
-<!-- 					<span sec:authentication='name'></span>
- --><!-- 					<input sec:authorize='isAuthenticated()' type='submit' value='Afmelden' id='logoutbutton'> -->
+					<span></span>
+					<input type='submit' value='Afmelden' id='logoutbutton'>
 				</form>
 			</li>
+			<li><a th:href='@{?locale=nl_BE}'>Nederlands</a></li>
+			<li><a th:href='@{?locale=fr_BE}'>Français</a></li>
 		</ul>
 	</nav>
 </body>

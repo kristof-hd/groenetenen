@@ -1,5 +1,6 @@
 package be.vdab.groenetenen.web;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,13 @@ class WerknemerController {
 		this.werknemerService = werknemerService;
 	}
 
+//	@GetMapping
+//	ModelAndView lijst() {
+//		return new ModelAndView(WERKNEMERS_VIEW, "werknemers", werknemerService.findAll());
+//	}
+	
 	@GetMapping
-	ModelAndView lijst() {
-		return new ModelAndView(WERKNEMERS_VIEW, "werknemers", werknemerService.findAll());
+	ModelAndView lijst(Pageable pageable) {
+		return new ModelAndView(WERKNEMERS_VIEW, "page", werknemerService.findAll(pageable));
 	}
 }

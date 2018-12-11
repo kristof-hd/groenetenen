@@ -4,5 +4,5 @@ import be.vdab.groenetenen.entities.Offerte;
 
 public interface MailSender {
 	void nieuweOfferte(Offerte offerte); 
-	void aantalOffertesMail(long aantal); 
+	//void aantalOffertesMail(long aantal); 
 }

@@ -40,17 +40,17 @@ class DefaultMailSender implements MailSender {
 		}
 	}
 	
-	@Override public void aantalOffertesMail(long aantal) {
-	try {
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message);
-		helper.setTo(emailAdresWebMaster);
-		helper.setSubject("Aantal offertes");
-		helper.setText("Aantal offertes:<strong>" + aantal + "</strong>", true);
-		sender.send(message);
-	} catch (MessagingException | MailException ex) {
-		LOGGER.error("Kan mail aantal offertes niet versturen", ex);
-		throw new KanMailNietZendenException();
-	}
-	}
+//	@Override public void aantalOffertesMail(long aantal) {
+//	try {
+//		MimeMessage message = sender.createMimeMessage();
+//		MimeMessageHelper helper = new MimeMessageHelper(message);
+//		helper.setTo(emailAdresWebMaster);
+//		helper.setSubject("Aantal offertes");
+//		helper.setText("Aantal offertes:<strong>" + aantal + "</strong>", true);
+//		sender.send(message);
+//	} catch (MessagingException | MailException ex) {
+//		LOGGER.error("Kan mail aantal offertes niet versturen", ex);
+//		throw new KanMailNietZendenException();
+//	}
+//	}
 }
