@@ -17,7 +17,7 @@ public class OfferteEnOffertesURL {
 		this.offertesURL = offertesURL;
 	}
 
-	public OfferteEnOffertesURL() {
+	protected OfferteEnOffertesURL() {
 	}
 
 	public Offerte getOfferte() {

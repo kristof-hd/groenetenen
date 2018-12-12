@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,21 +29,27 @@ class DefaultOfferteService implements OfferteService {
 		this.nieuweOfferteQueue=nieuweOfferteQueue; 
 	}
 
-	@Override
-	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-	public void create(Offerte offerte) {
-		offerteRepository.save(offerte);
-		mailSender.nieuweOfferte(offerte);
-	}
-
 //	@Override
 //	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 //	public void create(Offerte offerte, String offertesURL) {
 //		offerteRepository.save(offerte);
-//		OfferteEnOffertesURL offerteEnOffertesURL =	new OfferteEnOffertesURL(offerte, offertesURL);
-//		jmsTemplate.convertAndSend(nieuweOfferteQueue, offerteEnOffertesURL);
+//		mailSender.nieuweOfferte(offerte, offertesURL);
 //	}
+
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public void create(Offerte offerte, String offertesURL) {
+		offerteRepository.save(offerte);
+		OfferteEnOffertesURL offerteEnOffertesURL =	new OfferteEnOffertesURL(offerte, offertesURL);
+		jmsTemplate.convertAndSend(nieuweOfferteQueue, offerteEnOffertesURL);
+	}
 	
+	@Override
+	//@Scheduled(fixedRate=60000)
+	public void aantalOffertesMail() {
+		mailSender.aantalOffertesMail(offerteRepository.count());
+	} 
+		
 	@Override
 	public Optional<Offerte> read(long id) {
 		return offerteRepository.findById(id);

@@ -50,9 +50,10 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin().loginPage("/login").and().authorizeRequests().mvcMatchers("/offertes/toevoegen").hasAuthority(MANAGER)
+		http.formLogin().loginPage("/login").and().logout().logoutSuccessUrl("/").and().authorizeRequests().mvcMatchers("/offertes/toevoegen").hasAuthority(MANAGER)
 				.mvcMatchers("/werknemers").hasAnyAuthority(MAGAZIJNIER, HELPDESKMEDEWERKER)
 				.mvcMatchers("/", "/login").permitAll()
 				.mvcMatchers("/**").authenticated();
+		//http.logout();
 	}
 }
