@@ -9,4 +9,5 @@ public interface FiliaalService {
 	void delete(long id); 
 	void create(Filiaal filiaal); 
 	void update(Filiaal filiaal); 
+	void afschrijven(long id); 
 }

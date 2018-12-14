@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import be.vdab.groenetenen.entities.Offerte;
@@ -41,6 +41,7 @@ class DefaultMailSender implements MailSender {
 //	}
 
 	@Override
+	//@Async
 	public void nieuweOfferte(Offerte offerte, String offertesURL) {
 		try {
 			MimeMessage message = sender.createMimeMessage();
@@ -57,7 +58,8 @@ class DefaultMailSender implements MailSender {
 		}
 	}
 
-	@Override public void aantalOffertesMail(long aantal) {
+	@Override 
+	public void aantalOffertesMail(long aantal) {
 	try {
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
